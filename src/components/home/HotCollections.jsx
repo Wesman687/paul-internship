@@ -62,7 +62,7 @@ const HotCollections = () => {
             {...options}
           >
             {!loading
-              ? new Array(4).fill(0).map((_, index) => (
+              ? (new Array(4).fill(0).map((_, index) => (
                   <div className="nft_wrapper">
                     <div className="nft_coll skele_wrapper">
                       <div className="nft_wra">
@@ -89,8 +89,8 @@ const HotCollections = () => {
                       </div>
                     </div>                    
                   </div>
-                ))
-              : nftApi.map((array, index) => (
+                )))
+              : (nftApi.map((array, index) => (
                   <div className="nft_wrapper">
                     <div className="nft_coll owl_wrapper" key={index}>
                       <div className="nft_wrap ">
@@ -120,8 +120,8 @@ const HotCollections = () => {
                       </div>
                     </div>
                   </div>
-                ))}                
-                <div className="owl-prev owl-next"></div>
+                )))}
+                {!loading&&<div className="owl-prev owl-next"></div>}                
           </OwlCarousel>
         </div>
       </div>
