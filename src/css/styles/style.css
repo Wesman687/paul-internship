@@ -13182,6 +13182,7 @@ a.read_more i {
   margin-bottom: 10px;
 }
 
+
 .nft_coll.style-2 {
   border: none;
   background: none !important;
@@ -16643,11 +16644,20 @@ img {
     border-top: 1px solid green;
     padding: 50px 2em 0 0;
   }
+  .df {
+    display: flex;
+  }
 
   .container-timeline ul li::before {
     left: 0;
     top: -21px;
   }
+}
+
+.skele_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .skeleton-box {
@@ -16656,9 +16666,12 @@ img {
   position: relative;
   overflow: hidden;
   background-color: #dddbdd;
+  width: 100%;
+  padding: 20px;
 }
 
-.skeleton-box::after {
+
+.skeleton-box::after {  
   position: absolute;
   top: 0;
   right: 0;
