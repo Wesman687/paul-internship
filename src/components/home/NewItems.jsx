@@ -31,7 +31,7 @@ const NewItems = () => {
   const [nftApi, setNftApi] = useState([]);
   const [time, setTime] = useState("");
 
-  async function fetchApi() {}
+  async function fetchApi() {
     setLoading(true);
     const data = await axios.get(
       "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
