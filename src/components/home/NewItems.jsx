@@ -61,42 +61,51 @@ const NewItems = () => {
             </div>
           </div>
           <OwlCarousel
-            className="owl-theme owl-dot-off owl-loaded "          
+            className="owl-theme owl-dot-off owl-loaded "
             {...options}
             key={loading ? "loading" : "loaded"} >            
             {loading ? (
               new Array(4).fill(0).map((array, index) => (
-                <div className="nft_item_wrap skele-wrappper" key={index}>
-                  <div className="nft__item">
-                    <div className="nft__item_wrap">
-                      <a href="/">
-                        <Skeleton width="100%" height="200px" />
-                      </a>
-                    </div>
-                    <div className="nft_coll_pp">
-                      <a href="/">
-                        <Skeleton
-                          width="50px"
-                          height="50px"
-                          borderRadius="50%"
-                        />
-                      </a>
-                      <i className="fa fa-check"></i>
-                    </div>
-                    <div className="nft_coll_info skele_center">
-                      <a href="/" className="">
+                <div className="nft_coll new_container" key={index}>
+                    <div className="nft__item new_item">
+                      <div className="author_list_pp author_list_new">
+                          <Skeleton width="50px" height="50px" borderRadius="50%"/>
+                          <i className="fa fa-check"></i>
+                      </div>
+                      <div className="nft__item_wrap">
+                        <div className="nft__item_extra">
+                          <div className="nft__item_buttons">
+                            <div className="nft__item_share">
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-facebook fa-lg"></i>
+                              </a>
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-twitter fa-lg"></i>
+                              </a>
+                              <a href="">
+                                <i className="fa fa-envelope fa-lg"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                          <Skeleton width="100%" height="350px"/>
+                      </div>
+                      <div className="skele__item_info">
+                          <Skeleton width="180px" height="30px" />
+                          
                         <Skeleton width="100px" height="20px" />
-                      </a>
-                      <Skeleton width="60px" height="20px" />
+                        <div className="skele__like">                          
+                          <Skeleton width="30px" height="15px" />
+                          </div>
+                      </div>
                     </div>
                   </div>
-                </div>
               ))
             ) : (
                 nftApi.map((array, index) => (
                   <div className="nft_coll new_container" key={index}>
                     <div className="nft__item new_item">
-                      <div className="author_list_pp new_author">
+                      <div className="author_list_pp author_list_new">
                         <Link
                           to={`/author/${array.authorId}`}
                           data-bs-toggle="tooltip"
