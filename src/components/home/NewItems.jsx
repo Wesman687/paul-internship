@@ -30,7 +30,6 @@ const NewItems = () => {
   const [loading, setLoading] = useState(false);
   const [nftApi, setNftApi] = useState([]);
   const [time, setTime] = useState(new Date());
-  const [startFrame, setStart] = useState("0")
 
 
   async function fetchApi() {
@@ -42,12 +41,14 @@ const NewItems = () => {
     setNftApi(response);
     setLoading(false);
   }
-  setInterval(() => {
-    setTime(new Date());
-  }, 1000);
+
   
   useEffect(() => {
     fetchApi();    
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+  return () => clearInterval(interval);
   }, []);
   return (
     <section id="section-items" className="no-bottom">
@@ -60,8 +61,7 @@ const NewItems = () => {
             </div>
           </div>
           <OwlCarousel
-            className="owl-theme owl-dot-off owl-loaded "            
-            startPosition={startFrame}
+            className="owl-theme owl-dot-off owl-loaded "          
             {...options}
             key={loading ? "loading" : "loaded"} >            
             {loading ? (
