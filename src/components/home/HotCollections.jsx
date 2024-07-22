@@ -116,7 +116,7 @@ const HotCollections = () => {
                     </div>
                   </div>
                 ))}
-            <div className="owl-prev owl-next"></div>
+            {loading &&<div className="owl-prev owl-next"></div>}
           </OwlCarousel>
         </div>
       </div>
