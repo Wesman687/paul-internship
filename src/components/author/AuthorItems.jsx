@@ -3,13 +3,13 @@ import React, { useEffect, useState }  from "react";
 import { Link, useParams } from "react-router-dom";
 
 const AuthorItems = ( { author }) => {
-  const [collections, setCollections] = useState()
+  const [collection, setCollection] = useState()
   console.log(author)
   return (
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
-          {/*collections.map((array, index) => (
+          {/author.nftCollection.map((array, index) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
