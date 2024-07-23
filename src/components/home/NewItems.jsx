@@ -1,35 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
 import Skeleton from "../UI/Skeleton";
-
-const options = {
-  loop: true,
-  margin: 10,
-  nav: true,
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+const settings = {
   dots: false,
-  responsive: {
-    0: {
-      items: 1,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,  
+  Gamepad: 10,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
     },
-    600: {
-      items: 2,
+    {
+      breakpoint: 750,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        initialSlide: 2
+      }
     },
-    850: {
-      items: 3,
-    },
-    1050: {
-      items: 4,
-    },
-  },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
 };
+
+
+
 const NewItems = () => {
   const [loading, setLoading] = useState(false);
   const [nftApi, setNftApi] = useState([]);
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(new Date());  
+  let sliderRef = useRef(null);
+  const next = () => {
+    sliderRef.slickNext();
+  };
+  const previous = () => {
+    sliderRef.slickPrev();
+  };  
 
 
   async function fetchApi() {
@@ -60,10 +83,9 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <OwlCarousel
-            className="owl-theme owl-dot-off owl-loaded "
-            {...options}
-            key={loading ? "loading" : "loaded"} >            
+          <Slider ref={slider => {
+          sliderRef = slider;
+        }} className="owl-theme" {...settings} >            
             {loading ? (
               new Array(4).fill(0).map((array, index) => (
                 <div className="nft_coll new_container" key={index}>
@@ -100,10 +122,12 @@ const NewItems = () => {
                       </div>
                     </div>
                   </div>
+                  
               ))
             ) : (
                 nftApi.map((array, index) => (
-                  <div className="nft_coll new_container" key={index}>
+                  <div className="slide__wrapper" key={index}>
+                  <div className="nft__wrapper-new" >
                     <div className="nft__item new_item">
                       <div className="author_list_pp author_list_new">
                         <Link
@@ -165,12 +189,15 @@ const NewItems = () => {
                       </div>
                     </div>
                   </div>
+                  </div>
                 ))
             )}
-          </OwlCarousel>          
-          <div className="navbar-left"></div><div className="navbar-right"></div>
+          </Slider>                 
+          <button className="prev arrows owl-nav owl-theme owl-lazy" onClick={previous}>{"<"}</button>    
+          
+          <button className="next arrows owl-nav owl-theme owl-lazy" onClick={next}>{">"}</button>
+          </div>  
         </div>
-      </div>
     </section>
   );
 };

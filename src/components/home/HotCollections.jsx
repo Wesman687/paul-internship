@@ -57,7 +57,7 @@ const HotCollections = () => {
           </div>
 
           <OwlCarousel
-            className="owl-theme owl-dot-off owl-loaded "
+            className="owl-theme owl-dot-off "
             {...options} key={loading ? "loading" : "loaded"} 
           >
             {loading
@@ -90,13 +90,12 @@ const HotCollections = () => {
                   </div>
                 ))
               : nftApi.map((array, index) => (
-                  <div className="nft_wrapper" key={index}>
-                    <div className="nft_coll owl_wrapper">
+                  <div className="nft_wrapper   col-xs-12" key={index}>
+                    <div className="nft_coll">
                       <div className="nft_wrap">
                         <Link to={`./item-details/${array.nftId}`}>
-                          <img src={array.nftImage} className="lazy" alt="" />
+                          <img src={array.nftImage} className="lazy img-fluid" alt="" />
                         </Link>
-                      </div>
                       <div className="nft_coll_pp">
                         <Link to={`/author/${array.authorId}`}>
                           <img
@@ -106,6 +105,8 @@ const HotCollections = () => {
                           />
                         </Link>
                         <i className="fa fa-check"></i>
+                        
+                      </div>
                       </div>
                       <div className="nft_coll_info">
                         <Link to="/explore">

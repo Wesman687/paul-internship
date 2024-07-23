@@ -1,15 +1,22 @@
-import axios from "axios";
-import React, { useEffect, useState }  from "react";
-import { Link, useParams } from "react-router-dom";
+import React  from "react";
+import { Link} from "react-router-dom";
+import Skeleton from "../UI/Skeleton";
 
-const AuthorItems = ( { author }) => {
-  const [collection, setCollection] = useState()
-  console.log(author)
+const AuthorItems = ( { author, loading }) => {
   return (
     <div className="de_tab_content">
       <div className="tab-1">
-        <div className="row">
-          {/author.nftCollection.map((array, index) => (
+        <div className="row">{loading ? 
+              new Array(8).fill(0).map((array, index) => (
+                <div
+                    key={index}
+                    className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                    style={{ display: "block", backgroundSize: "cover" }}
+                  >
+                      <Skeleton width="100%" height="400px" />
+                  </div>
+                )) :
+          author.nftCollection && author.nftCollection.map((array, index) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
@@ -36,7 +43,7 @@ const AuthorItems = ( { author }) => {
                       </div>
                     </div>
                   </div>
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${array.nftId}`}>
                     <img
                       src={array.nftImage}
                       className="lazy nft__item_preview"
@@ -45,7 +52,7 @@ const AuthorItems = ( { author }) => {
                   </Link>
                 </div>
                 <div className="nft__item_info">
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${array.nftId}`}>
                     <h4>{array.title}</h4>
                   </Link>
                   <div className="nft__item_price">{array.price} ETH</div>
@@ -56,7 +63,7 @@ const AuthorItems = ( { author }) => {
                 </div>
               </div>
             </div>
-          ))*/}
+          ))}
         </div>
       </div>
     </div>

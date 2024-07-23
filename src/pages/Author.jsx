@@ -4,6 +4,7 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const Author = () => {
     
     setAuthor(result);
     setLoading(false);    
-    setFollowers(author.followers)
+    setFollowers(result.followers)
   }
   function decrementFollower(){    
     setFollower(false)
@@ -48,14 +49,43 @@ const Author = () => {
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(AuthorBanner) top` }}
         ></section>
-
+        
         <section aria-label="section">
           <div className="container">
             <div className="row">
+            {loading ? <div className="col-md-12">
+                <div className="d_profile de-flex">
+                  <div className="de-flex-col">
+                  <div className="profile_avatar">
+                      <Skeleton width="150px" height="150px" borderRadius="50%" />
+
+                      <i className="fa fa-check"></i>
+                      <div className="profile_name">
+                        <h4>
+                          <Skeleton width="200px" />
+                          <span className="profile_username">
+                          <Skeleton width="100px" /></span>
+                          <span id="wallet" className="profile_wallet">
+                          
+                          <Skeleton width="250px" />
+                          </span>
+                         
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="profile_follow de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_follower">{followers} followers</div>
+                      <Skeleton width="150px" height="40px" />
+                    </div>
+                  </div>
+                </div>
+              </div> : 
               <div className="col-md-12">
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
-                    <div className="profile_avatar">
+                  <div className="profile_avatar">
                       <img src={author.authorImage} alt="" />
 
                       <i className="fa fa-check"></i>
@@ -84,11 +114,11 @@ const Author = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>}
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems author={author }/>
+                  <AuthorItems author={author} loading={loading}/>
                 </div>
               </div>
             </div>
